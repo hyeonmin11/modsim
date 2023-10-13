@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<SES>
+  <item type="entity" model="CM" parent="root" name="EF_A" depth="1" />
+  <item type="aspect" parent="EF_A" name="EF_A_dec" />
+  <priority type="list" parent="EF_A_dec" name="EF" selected="1" />
+  <priority type="list" parent="EF_A_dec" name="ARCH" selected="2" />
+  <coupling type="line" parent="EF_A_dec" index="1" source="EF" outport="out" destin="ARCH" inport="in" selected="0" />
+  <coupling type="line" parent="EF_A_dec" index="2" source="ARCH" outport="out" destin="EF" inport="in" selected="0" />
+  <item type="entity" model="CM" parent="EF_A" name="ARCH" depth="2" />
+  <item type="specialization" parent="ARCH" name="arch_spec" />
+  <item type="entity" model="AM" parent="ARCH" name="P" depth="3" />
+  <item type="entity" model="CM" parent="ARCH" name="MUL_ARCH" depth="3" />
+  <item type="aspect" parent="MUL_ARCH" name="MUL_ARCH_dec" />
+  <priority type="list" parent="MUL_ARCH_dec" name="P1" selected="1" />
+  <priority type="list" parent="MUL_ARCH_dec" name="P2" selected="2" />
+  <priority type="list" parent="MUL_ARCH_dec" name="P3" selected="3" />
+  <priority type="list" parent="MUL_ARCH_dec" name="MUL_C" selected="4" />
+  <coupling type="line" parent="MUL_ARCH_dec" index="1" source="MUL_ARCH" outport="in" destin="MUL_C" inport="in" selected="0" />
+  <coupling type="line" parent="MUL_ARCH_dec" index="2" source="MUL_C" outport="out" destin="MUL_ARCH" inport="out" selected="0" />
+  <coupling type="line" parent="MUL_ARCH_dec" index="3" source="MUL_C" outport="x1" destin="P1" inport="in" selected="0" />
+  <coupling type="line" parent="MUL_ARCH_dec" index="4" source="P1" outport="out" destin="MUL_C" inport="y1" selected="0" />
+  <coupling type="line" parent="MUL_ARCH_dec" index="5" source="MUL_C" outport="x2" destin="P2" inport="in" selected="0" />
+  <coupling type="line" parent="MUL_ARCH_dec" index="6" source="P2" outport="out" destin="MUL_C" inport="y2" selected="0" />
+  <coupling type="line" parent="MUL_ARCH_dec" index="7" source="MUL_C" outport="x3" destin="P3" inport="in" selected="0" />
+  <coupling type="line" parent="MUL_ARCH_dec" index="8" source="P3" outport="out" destin="MUL_C" inport="y3" selected="0" />
+  <item type="entity" model="AM" parent="MUL_ARCH" name="MUL_C" depth="4" />
+  <item type="entity" model="AM" parent="MUL_ARCH" name="P1" depth="4" />
+  <item type="entity" model="AM" parent="MUL_ARCH" name="P2" depth="4" />
+  <item type="entity" model="AM" parent="MUL_ARCH" name="P3" depth="4" />
+  <item type="entity" model="CM" parent="ARCH" name="PIPE_ARCH" depth="3" />
+  <item type="aspect" parent="PIPE_ARCH" name="PIPE_ARCH_dec" />
+  <priority type="list" parent="PIPE_ARCH_dec" name="P1" selected="1" />
+  <priority type="list" parent="PIPE_ARCH_dec" name="P2" selected="2" />
+  <priority type="list" parent="PIPE_ARCH_dec" name="P3" selected="3" />
+  <priority type="list" parent="PIPE_ARCH_dec" name="PIP_C" selected="4" />
+  <coupling type="line" parent="PIPE_ARCH_dec" index="1" source="PIP_C" outport="out" destin="PIPE_ARCH" inport="out" selected="0" />
+  <coupling type="line" parent="PIPE_ARCH_dec" index="2" source="PIPE_ARCH" outport="in" destin="PIP_C" inport="in" selected="0" />
+  <coupling type="line" parent="PIPE_ARCH_dec" index="3" source="PIP_C" outport="x1" destin="P1" inport="in" selected="0" />
+  <coupling type="line" parent="PIPE_ARCH_dec" index="4" source="P1" outport="out" destin="PIP_C" inport="y1" selected="0" />
+  <coupling type="line" parent="PIPE_ARCH_dec" index="5" source="PIP_C" outport="x2" destin="P2" inport="in" selected="0" />
+  <coupling type="line" parent="PIPE_ARCH_dec" index="6" source="P2" outport="out" destin="PIP_C" inport="y2" selected="0" />
+  <coupling type="line" parent="PIPE_ARCH_dec" index="7" source="PIP_C" outport="x3" destin="P3" inport="in" selected="0" />
+  <coupling type="line" parent="PIPE_ARCH_dec" index="8" source="P3" outport="out" destin="PIP_C" inport="y3" selected="0" />
+  <item type="entity" model="AM" parent="PIPE_ARCH" name="PIP_C" depth="4" />
+  <item type="entity" model="AM" parent="PIPE_ARCH" name="P1" depth="4" />
+  <item type="entity" model="AM" parent="PIPE_ARCH" name="P2" depth="4" />
+  <item type="entity" model="AM" parent="PIPE_ARCH" name="P3" depth="4" />
+  <item type="entity" model="CM" parent="ARCH" name="DC_ARCH" depth="3" />
+  <item type="aspect" parent="DC_ARCH" name="DC_ARCH_dec" />
+  <priority type="list" parent="DC_ARCH_dec" name="P&amp;CMPL" selected="1" />
+  <priority type="list" parent="DC_ARCH_dec" name="P1" selected="2" />
+  <priority type="list" parent="DC_ARCH_dec" name="P2" selected="3" />
+  <priority type="list" parent="DC_ARCH_dec" name="P3" selected="4" />
+  <priority type="list" parent="DC_ARCH_dec" name="P&amp;DIV" selected="5" />
+  <priority type="list" parent="DC_ARCH_dec" name="DC_C" selected="6" />
+  <coupling type="line" parent="DC_ARCH_dec" index="1" source="DC_C" outport="px" destin="P&amp;DIV" inport="in" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="2" source="DC_C" outport="x1" destin="P1" inport="in" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="3" source="DC_C" outport="x2" destin="P2" inport="in" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="4" source="DC_C" outport="x3" destin="P3" inport="in" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="5" source="DC_C" outport="cx" destin="P&amp;CMPL" inport="in" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="6" source="P&amp;DIV" outport="out" destin="DC_C" inport="py" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="7" source="P1" outport="out" destin="DC_C" inport="y1" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="8" source="P2" outport="out" destin="DC_C" inport="y2" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="9" source="P3" outport="out" destin="DC_C" inport="y3" selected="0" />
+  <coupling type="line" parent="DC_ARCH_dec" index="10" source="P&amp;CMPL" outport="out" destin="DC_C" inport="cy" selected="0" />
+  <item type="entity" model="AM" parent="DC_ARCH" name="P&amp;DIV" depth="4" />
+  <item type="entity" model="AM" parent="DC_ARCH" name="P1" depth="4" />
+  <item type="entity" model="AM" parent="DC_ARCH" name="P2" depth="4" />
+  <item type="entity" model="AM" parent="DC_ARCH" name="P3" depth="4" />
+  <item type="entity" model="AM" parent="DC_ARCH" name="P&amp;CMPL" depth="4" />
+  <item type="entity" model="AM" parent="DC_ARCH" name="DC_C" depth="4" />
+  <item type="entity" model="CM" parent="EF_A" name="EF" depth="2" />
+  <item type="aspect" parent="EF" name="EF_dec" />
+  <coupling type="line" parent="EF_dec" index="1" source="EF" outport="in" destin="TRANSD" inport="solved" selected="0" />
+  <coupling type="line" parent="EF_dec" index="2" source="GENR" outport="out" destin="EF" inport="out" selected="0" />
+  <coupling type="line" parent="EF_dec" index="3" source="TRANSD" outport="out" destin="EF" inport="result" selected="0" />
+  <coupling type="line" parent="EF_dec" index="4" source="TRANSD" outport="out" destin="GENR" inport="stop" selected="0" />
+  <coupling type="line" parent="EF_dec" index="5" source="GENR" outport="out" destin="TRANSD" inport="arrived" selected="0" />
+  <item type="entity" model="AM" parent="EF" name="GENR" depth="3" />
+  <item type="entity" model="AM" parent="EF" name="TRANSD" depth="3" />
+</SES>
