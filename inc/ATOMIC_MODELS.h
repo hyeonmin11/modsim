@@ -20,27 +20,27 @@
 #include "DISPLAY.h"
 
 // ************************************************************
-// 이름: 남수만 [2016-10-12]
-// 설명: 모델 테스트용
+// ???: ?????? [2016-10-12]
+// ????: ?? ??????
 #define LOAD_MODEL( model, model_name ) \
 	model* atomic_model = new model( model_name ); \
 	atomic_model->executeModelTest();
 // ************************************************************
 
 /**
- * @author	남수만
+ * @author	??????
  * @date	2016-11-24
  * @enum	model_window
  */
 DLL_EXPORT enum model_window
 {
-	Ext, /*!< Enum value 외부상태천이 함수 */
-	Int, /*!< Enum value 내부상태천이 함수. */
-	Output /*!< Enum value 출력 함수. */
+	Ext, /*!< Enum value ??λ?????? ??? */
+	Int, /*!< Enum value ???λ?????? ???. */
+	Output /*!< Enum value ??? ???. */
 };
 
 /**
- * @author	남수만
+ * @author	??????
  * @date	2016-11-24
  * @file	ATOMIC_MODELS.h
  * @brief	ATOMIC_MODELS class
@@ -60,10 +60,10 @@ private:
 	int job_count = -1;
 
 	/**
-	 * @author	남수만
+	 * @author	??????
 	 * @date	2016-11-24
 	 * @enum	command
-	 * @brief	Atomic Model 테스트 시 command_vector의 위치에 따른 값 분류
+	 * @brief	Atomic Model ???? ?? command_vector?? ????? ???? ?? ?з?
 	 * @see		ATOMIC_MODELS::executeModelTest()
 	 */
 	enum command
@@ -86,9 +86,9 @@ public:
 	/**
 	 *
 	 * @enum	window
-	 * @brief	displayStateVars()에서 시뮬레이션과 모델 윈도우 출력을 구분하기 위해 정의
+	 * @brief	displayStateVars()???? ???????? ?? ?????? ????? ??????? ???? ????
 	 *
-	 * @author	남수만
+	 * @author	??????
 	 * @date	2017-01-26
 	 *
 	 * @see		void ATOMIC_MODELS::displayStateVars()
