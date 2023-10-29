@@ -1,4 +1,4 @@
-#include "nep.m.h"
+#include "NEP.m.h"
 
 NEP::NEP(string name)
 {
@@ -28,10 +28,10 @@ void NEP::internalTransitionFunc()
     }
 }
 
-CONTENT P::outputFunc()
+CONTENT NEP::outputFunc()
 {
     CONTENT y;
-    string id = job_id.getV();
+    string id = "g1"; //job_id.getV();
 
     if (phase == "process"){
         y.setContent(out, id);

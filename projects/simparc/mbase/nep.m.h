@@ -2,7 +2,7 @@
 #define __NEP_M_H__
 
 #include "ATOMIC_MODELS.h"
-#include "MCROS.h"
+#include "MACROS.h"
 
 #define NEP_NAME "NEP"
 

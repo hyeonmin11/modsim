@@ -1,26 +1,25 @@
-#ifndef __TSP_M_H__
-#define __TSP_M_H__
+#ifndef __CG_M_H__ 
+#define __CG_M_H__
 
 #include "ATOMIC_MODELS.h"
 #include "MACROS.h"
 
-#define TSP_NAME "TSP"
+#define CG_NAME "CG"
 
-class TSP: public ATOMIC_MODELS
+class CG: public ATOMIC_MODELS
 {
     protected: 
-        STATE_VARS job_id;
+        //STATE_VARS job_id;
         STATE_VARS processing_time1;
         STATE_VARS processing_time2;
-        STATE_VARS processing_time3;
-    
+
     public:
-        PORT* in;
+        PORT* stop;
         PORT* out1;
         PORT* out2;
 
-        TSP(string name);
-        ~TSP();
+        CG(string name);
+        ~CG();
 
         void externalTransitionFunc(timetype e, CONTENT x);
         void internalTransitionFunc();

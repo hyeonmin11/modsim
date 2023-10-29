@@ -1,26 +1,29 @@
-#ifndef __TSP_M_H__
-#define __TSP_M_H__
+#ifndef __TWIOP_M_H__
+#define __TWIOP_M_H__
 
 #include "ATOMIC_MODELS.h"
 #include "MACROS.h"
 
-#define TSP_NAME "TSP"
+#define TWIOP_NAME "TWIOP"
 
-class TSP: public ATOMIC_MODELS
+class TWIOP: public ATOMIC_MODELS
 {
     protected: 
-        STATE_VARS job_id;
+        //STATE_VARS job_id;
         STATE_VARS processing_time1;
         STATE_VARS processing_time2;
         STATE_VARS processing_time3;
-    
+        
+
     public:
-        PORT* in;
+        PORT* in1;
+        PORT* in2;
         PORT* out1;
         PORT* out2;
+        string id_inport;  // -    << 공중에 띄워진 대시 쓰면 안된다;;
 
-        TSP(string name);
-        ~TSP();
+        TWIOP(string name);
+        ~TWIOP();
 
         void externalTransitionFunc(timetype e, CONTENT x);
         void internalTransitionFunc();
