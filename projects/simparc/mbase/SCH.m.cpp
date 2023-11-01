@@ -70,10 +70,12 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 
 	if(id_inport == "in" ){
 		if(job_id == "alarm"){
-			Continue(e);
+			//Continue(e);
+			holdIn("wakeup", STR_TO_DBL(processing_time_wakeup.getV()));
 		}
 		else if(job_id == "mealtime"){
 			Continue(e);
+			// this is only for weekday and for lunch, dinner and snack. not for breakfast
 		}
 	}
 	else if(id_inport == "date"){
@@ -107,16 +109,35 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 void SCH::internalTransitionFunc()
 {
     
-	if ( phase == "gohome" )
-		holdIn( "sleep", STR_TO_DBL(processing_time_sleep.getV()));
-		//holdIn( "study", STR_TO_DBL(processing_time_study.getV()));
-	else if ( phase == "nap" ){
-		holdIn( "study", STR_TO_DBL(processing_time_study.getV()));
-		feeling_id = "active";
+	if( date_id == "weekday" ){
+
+		if ( phase == "gohome" )
+			holdIn( "sleep", STR_TO_DBL(processing_time_sleep.getV()));
+			//holdIn( "study", STR_TO_DBL(processing_time_study.getV()));
+		else if ( phase == "nap" ){
+			holdIn( "study", STR_TO_DBL(processing_time_study.getV()));
+			feeling_id = "active";
+		}
+		else if ( phase == "workout"){
+			holdIn( "study", STR_TO_DBL( processing_time_study.getV()));
+			//passivate();
+		}
+		else if ( phase == "wakeup" ){
+			holdIn( "mealtime", STR_TO_DBL( processing_time_mealtime.getV()));
+		}
+
 	}
-	else if ( phase == "workout"){
-		holdIn( "study", STR_TO_DBL( processing_time_study.getV()));
-		//passivate();
+
+
+
+
+	if( date_id == "weekend"){
+		if( phase == "mealtime"){
+			holdIn( "sleep", STR_TO_DBL( processing_time_sleep.getV()));
+		}
+		else if ( phase == "sleep" || phase == "wakeup"){
+			holdIn( "mealtime", STR_TO_DBL( processing_time_mealtime.getV()));
+		}
 	}
 
 
@@ -132,9 +153,14 @@ CONTENT SCH::outputFunc()
 		y.setContent(message, id_inport);
 	}
 	if(phase == "gohome"){
-		y.setContent(out, "Gohome, shower and go to bed. Good night");
+		y.setContent(out, " Gohome, shower and go to bed. Good night");
 	}
-
+	if(phase == "wakeup"){
+		y.setContent(out, " sleep");
+	}
+	if(phase == "mealtime"){
+		y.setContent(out, " stuffed");
+	}
 
     /*
 
