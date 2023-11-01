@@ -73,9 +73,10 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 			//Continue(e);
 			holdIn("wakeup", STR_TO_DBL(processing_time_wakeup.getV()));
 		}
-		else if(job_id == "mealtime"){
-			Continue(e);
+		else if(job_id == "mealtime2"){
+			//Continue(e);
 			// this is only for weekday and for lunch, dinner and snack. not for breakfast
+			holdIn( "mealtime2", STR_TO_DBL( processing_time_mealtime.getV()));
 		}
 	}
 	else if(id_inport == "date"){
@@ -125,7 +126,15 @@ void SCH::internalTransitionFunc()
 		else if ( phase == "wakeup" ){
 			holdIn( "mealtime", STR_TO_DBL( processing_time_mealtime.getV()));
 		}
-
+		else if ( phase == "mealtime" ){ // this is for breakfast
+			holdIn( "lecture", STR_TO_DBL( processing_time_lecture.getV()));
+		}
+		else if ( phase == "mealtime2" ){ // this is for lunch dinner and snack
+			holdIn( "study", STR_TO_DBL( processing_time_study.getV()));
+		}
+		else if ( phase == "lecture"){
+			holdIn( "study", STR_TO_DBL( processing_time_study.getV()));
+		}
 	}
 
 
@@ -161,30 +170,6 @@ CONTENT SCH::outputFunc()
 	if(phase == "mealtime"){
 		y.setContent(out, " stuffed");
 	}
-
-    /*
-
-    if(id_inport == "feeling"){
-        if( phase == "sleep" ){
-            string id = "recharged";
-            y.setContent(feeling_changed, id);
-        }
-    }
-    else if(id_inport == "day_finish"){
-        string id = "good night";
-        y.setContent(out, id);
-    }
-    else if(id_inport == "assignment_left"){
-        if(phase == ""){
-
-        }
-        else if(phase == "eat" || phase == "workout"){
-            string id = "interuppted by " + phase.getV();
-            y.setContent(y.setContent(message, id));
-        }
-    }
-    */
-
     
 	return y;
 }
