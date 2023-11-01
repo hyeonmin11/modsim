@@ -4,62 +4,51 @@ SCH::SCH( string name )
 {
 	linkSimulator( name );
 
+	in = new PORT( "in" );
+    date = new PORT( "date" );
 	feeling = new PORT( "feeling" );
+	day_finish = new PORT( "day_finish" );
+
 	out = new PORT( "out" );
 	message = new PORT( "message" );
 
+	addInport( *in );
+    addInport( *date );
 	addInport( *feeling );
+	addInport( *day_finish );
+
 	addOutport( *out );
 	addOutport( *message );
 
-	assignment_left = new PORT( "assignment_left" );
-	day_finish = new PORT( "day_finish" );
-	feeling_changed = new PORT( "feeling_changed" );
 
-	addInport( *assignment_left );
-	addInport( *day_finish );
-	addOutport( *feeling_changed );
+	processing_time_wakeup("processing_time_wakeup");
+	processing_time_mealtime("processing_time_mealtime");
+	processing_time_lecture("processing_time_lecture");
+	processing_time_nap("processing_time_nap");
+	processing_time_workout("processing_time_workout");
 
-	job_id( "job_id" );
-	time_remaining( "time_remaining" );
-	interrupt_handling_time( "interrupt_handling_time" );
-
-    processing_time_sleep( "processing_time_sleep" );
-    processing_time_nap( "processing_time_nap" );
-    //processing_time_walk( "processing_time_walk" );
-    processing_time_lecture( "processing_time_lecture" );
-    processing_time_eat( "processing_time_eat" );
-    processing_time_study( "processing_time_study" );
-    processing_time_workout( "processing_time_workout" );
+	processing_time_wakeup = 0;
+	processing_time_mealtime = 1.0;
+	processing_time_lecture = 2.0;
+	processing_time_nap = 1.0;
+	processing_time_workout = 2.0;
 
 	sigma = INFINITY;
 	phase = "sleep";
-
+	id_inport = "-";
 	job_id = "-";
 	temp = "-";
-    id_inport = "-";
-	time_remaining = 0.0;
-	interrupt_handling_time = 0.1;
-
-    processing_time_eat = 5.0;
-    processing_time_lecture = 5.0;
-    processing_time_nap = 5.0;
-    processing_time_sleep = 5.0;
-    processing_time_study = 5.0;
-    //processing_time_walk = 5.0;
-    processing_time_workout = 5.0;
-
 }
 
 SCH::~SCH()
 {
-	delete day_finish;
+	delete in;
+	delete date;
 	delete feeling;
-	delete message;
-
+	delete day_finish;
+	
 	delete out;
-	delete assignment_left;
-	delete feeling_changed;
+	delete message;
 }
 
 void SCH::externalTransitionFunc( timetype e, CONTENT x )

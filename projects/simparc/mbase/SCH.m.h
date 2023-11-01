@@ -12,23 +12,20 @@ protected:
 	STATE_VARS job_id;
 	STATE_VARS temp;
 
-	STATE_VARS processing_time_sleep;
+	STATE_VARS processing_time_wakeup;
+	STATE_VARS processing_time_mealtime;
+	STATE_VARS processing_time_lecture;
     STATE_VARS processing_time_nap;
-    //STATE_VARS processing_time_walk;
-    STATE_VARS processing_time_lecture;
-    STATE_VARS processing_time_eat;
-    STATE_VARS processing_time_study;
     STATE_VARS processing_time_workout;
 
-	STATE_VARS time_remaining;
-	STATE_VARS interrupt_handling_time;
+
 
 public:
-	PORT* assignment_left;
+	PORT* in;
+	PORT* date;
     PORT* feeling;
     PORT* day_finish;
 
-    PORT* feeling_changed;
 	PORT* out;
 	PORT* message;
 
