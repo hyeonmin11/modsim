@@ -29,6 +29,7 @@ SPK::SPK( string name )
     winner = "none";
     //score = winner.getV() + ", " + Ascore + " : " + Bscore;
 
+    srand(1);
 }
 
 
@@ -77,7 +78,7 @@ CONTENT SPK::outputFunc()
 	CONTENT y;
 	string kick_type = kick_type_.getV();
     string goalOrngoal;
-    srand(1);
+    //srand(1);
 
     if(kick_type == "fz"){
         goalOrngoal = (rand() < RAND_MAX * 0.5) ? "goal" : "no-goal";

@@ -1,4 +1,4 @@
-/*
+
 #include "ps.m.h"
 
 PS::PS( string name )
@@ -30,12 +30,34 @@ PS::~PS()
 
 void PS::externalTransitionFunc(timetype e, CONTENT x)
 {
-
+	if ( *in == x.getPort() )
+	{
+		if ( phase == "passive" )
+		{
+			job_id = x.getValue();
+			holdIn( "busy", STR_TO_DBL( processing_time.getV() ) );
+		}
+		else if ( phase == "busy" )
+		{
+			_stack.push( x.getValue() );
+			Continue( e );
+		}
+	}
 }
 
 void PS::internalTransitionFunc()
 {
-
+	if ( phase == "busy" )
+	{
+		if ( 1 ) //_stack.empty()
+			passivate();
+		else
+		{
+			job_id = _stack.top();
+            _stack.pop();
+			holdIn( "busy", STR_TO_DBL( processing_time.getV() ) );
+		}
+	}
 }
 
 CONTENT PS::outputFunc()
@@ -49,4 +71,3 @@ CONTENT PS::outputFunc()
 
     return y;
 }
-*/

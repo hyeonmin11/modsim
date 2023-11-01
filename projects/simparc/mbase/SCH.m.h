@@ -14,7 +14,7 @@ protected:
 
 	STATE_VARS processing_time_sleep;
     STATE_VARS processing_time_nap;
-    STATE_VARS processing_time_walk;
+    //STATE_VARS processing_time_walk;
     STATE_VARS processing_time_lecture;
     STATE_VARS processing_time_eat;
     STATE_VARS processing_time_study;
@@ -38,6 +38,6 @@ public:
 	void externalTransitionFunc( timetype e, CONTENT x );
 	void internalTransitionFunc();
 	CONTENT outputFunc();
-	
+	string id_inport;
 };
 #endif

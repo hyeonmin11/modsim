@@ -26,7 +26,7 @@ SCH::SCH( string name )
 
     processing_time_sleep( "processing_time_sleep" );
     processing_time_nap( "processing_time_nap" );
-    processing_time_walk( "processing_time_walk" );
+    //processing_time_walk( "processing_time_walk" );
     processing_time_lecture( "processing_time_lecture" );
     processing_time_eat( "processing_time_eat" );
     processing_time_study( "processing_time_study" );
@@ -37,6 +37,7 @@ SCH::SCH( string name )
 
 	job_id = "-";
 	temp = "-";
+    id_inport = "-";
 	time_remaining = 0.0;
 	interrupt_handling_time = 0.1;
 
@@ -45,7 +46,7 @@ SCH::SCH( string name )
     processing_time_nap = 5.0;
     processing_time_sleep = 5.0;
     processing_time_study = 5.0;
-    processing_time_walk = 5.0;
+    //processing_time_walk = 5.0;
     processing_time_workout = 5.0;
 
 }
@@ -63,8 +64,10 @@ SCH::~SCH()
 
 void SCH::externalTransitionFunc( timetype e, CONTENT x )
 {
+    PORT* tempP = x.getPort();
+    id_inport = (*tempP).getName();
     /*
-	if ( *in == x.getPort() )
+	if ( *assignment_left == x.getPort() )
 	{
 		if ( phase == "passive" )
 		{
@@ -81,8 +84,51 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 		}
 		else if ( phase == "INTERRUPTED" )
 			Continue( e );
+
+        //Continue(e);
+	}
+	else if ( *feeling == x.getPort() )
+	{
+		if ( phase == "passive" )
+		{
+			job_id = x.getValue();
+			time_remaining = processing_time;
+			holdIn( "busy", STR_TO_DBL( processing_time.getV() ) );
+		}
+		else if ( phase == "busy" )
+		{
+			time_remaining = STR_TO_DBL( time_remaining.getV() ) - e;
+			processing_time = 5.0;
+			temp = x.getValue();
+			holdIn( "INTERRUPTED", STR_TO_DBL( interrupt_handling_time.getV() ) );
+		}
+		else if ( phase == "INTERRUPTED" )
+			Continue( e );
+
+        //Continue(e);
+	}
+	else if ( *day_finish == x.getPort() )
+	{
+		if ( phase == "passive" )
+		{
+			job_id = x.getValue();
+			time_remaining = processing_time;
+			holdIn( "busy", STR_TO_DBL( processing_time.getV() ) );
+		}
+		else if ( phase == "busy" )
+		{
+			time_remaining = STR_TO_DBL( time_remaining.getV() ) - e;
+			processing_time = 5.0;
+			temp = x.getValue();
+			holdIn( "INTERRUPTED", STR_TO_DBL( interrupt_handling_time.getV() ) );
+		}
+		else if ( phase == "INTERRUPTED" )
+			Continue( e );
+        
+        //Continue(e);
 	}
     */
+
     Continue(e);
 }
 
@@ -96,26 +142,40 @@ void SCH::internalTransitionFunc()
 	else
 		passivate();
     */
+
+
     passivate();
 }
 CONTENT SCH::outputFunc()
 {
 	CONTENT y;
 
-    string id = job_id.getV();
-    y.setContent( out, id );
-    
+    //string id = job_id.getV();
+    //y.setContent( out, id );
+
     /*
-	if ( phase == "busy" )
-	{
-		string id = job_id.getV();
-		y.setContent( out, id );
-	}
-	else if ( phase == "INTERRUPTED" )
-	{
-		string id = "interrupted by " + temp.getV();
-		y.setContent( message, id );
-	}
+
+    if(id_inport == "feeling"){
+        if( phase == "sleep" ){
+            string id = "recharged";
+            y.setContent(feeling_changed, id);
+        }
+    }
+    else if(id_inport == "day_finish"){
+        string id = "good night";
+        y.setContent(out, id);
+    }
+    else if(id_inport == "assignment_left"){
+        if(phase == ""){
+
+        }
+        else if(phase == "eat" || phase == "workout"){
+            string id = "interuppted by " + phase.getV();
+            y.setContent(y.setContent(message, id));
+        }
+    }
     */
+
+    
 	return y;
 }
