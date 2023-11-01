@@ -24,7 +24,8 @@ protected:
 public:
 	PORT* in;
 	PORT* date;
-    PORT* feeling;
+	PORT* breaktime;
+    //PORT* feeling;
     PORT* day_finish;
 
 	PORT* out;

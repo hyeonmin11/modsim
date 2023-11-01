@@ -1,12 +1,14 @@
 #include "SCH.m.h"
 
+
 SCH::SCH( string name )
 {
 	linkSimulator( name );
 
 	in = new PORT( "in" );
     date = new PORT( "date" );
-	feeling = new PORT( "feeling" );
+	breaktime = new PORT( "breaktime" );
+	//feeling = new PORT( "feeling" );
 	day_finish = new PORT( "day_finish" );
 
 	out = new PORT( "out" );
@@ -14,7 +16,8 @@ SCH::SCH( string name )
 
 	addInport( *in );
     addInport( *date );
-	addInport( *feeling );
+	addInport( *breaktime );
+	//addInport( *feeling );
 	addInport( *day_finish );
 
 	addOutport( *out );
@@ -52,7 +55,8 @@ SCH::~SCH()
 {
 	delete in;
 	delete date;
-	delete feeling;
+	delete breaktime;
+	//delete feeling;
 	delete day_finish;
 	
 	delete out;
@@ -81,8 +85,14 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 			date_id = "weekend";
 		}
 	}
-	else if(id_inport == "feeling"){
-		Continue(e);
+	else if(id_inport == "breaktime"){
+		//Continue(e);
+		if( job_id == "tired" ){
+			holdIn("nap", STR_TO_DBL(processing_time_nap.getV()));
+		}
+		else if( job_id == "active" ){
+			holdIn("workout", STR_TO_DBL(processing_time_workout.getV()));
+		}
 	}
 	else if(id_inport == "day_finish"){
 		//Continue(e);
@@ -99,12 +109,16 @@ void SCH::internalTransitionFunc()
     
 	if ( phase == "gohome" )
 		holdIn( "sleep", STR_TO_DBL(processing_time_sleep.getV()));
-	/*
-	else if ( phase == "INTERRUPTED" )
-		holdIn( "busy", STR_TO_DBL( time_remaining.getV() ) );
-	else
-		passivate();
-    */
+		//holdIn( "study", STR_TO_DBL(processing_time_study.getV()));
+	else if ( phase == "nap" ){
+		holdIn( "study", STR_TO_DBL(processing_time_study.getV()));
+		feeling_id = "active";
+	}
+	else if ( phase == "workout"){
+		holdIn( "study", STR_TO_DBL( processing_time_study.getV()));
+		//passivate();
+	}
+
 
 
     //passivate();
@@ -113,8 +127,14 @@ CONTENT SCH::outputFunc()
 {
 	CONTENT y;
 
-    string id = job_id.getV();
-    y.setContent( out, id );
+
+	if(id_inport == "breaktime"){
+		y.setContent(message, id_inport);
+	}
+	if(phase == "gohome"){
+		y.setContent(out, "Gohome, shower and go to bed. Good night");
+	}
+
 
     /*
 
