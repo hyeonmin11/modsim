@@ -11,7 +11,7 @@ class SPK: public ATOMIC_MODELS
 protected: // state variables
 	STATE_VARS kick_type_;
 	STATE_VARS processing_time;
-    STATE_VARS score;
+    //STATE_VARS score;
     STATE_VARS winner;
 
 public:

@@ -10,7 +10,7 @@ class SCH: public ATOMIC_MODELS
 {
 protected:
 	STATE_VARS job_id; // this is for 'in' port
-	STATE_VARS temp;
+	//STATE_VARS temp;
 	STATE_VARS date_id;
 	STATE_VARS feeling_id;
 

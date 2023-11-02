@@ -18,7 +18,7 @@ SPK::SPK( string name )
 	kick_type_( "kick_type_" );
 	processing_time( "processing_time" );
     winner("winner");
-    score("score");
+    //score("score");
 
     id_inport = "-";
 
