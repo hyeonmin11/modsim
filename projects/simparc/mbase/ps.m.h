@@ -12,6 +12,7 @@ class PS: public ATOMIC_MODELS
     protected:
         STATE_VARS job_id;
         stack<string> _stack;
+        STATE_VARS stack_;
         STATE_VARS processing_time;
     
     public:

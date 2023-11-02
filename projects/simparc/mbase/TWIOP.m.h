@@ -13,14 +13,14 @@ class TWIOP: public ATOMIC_MODELS
         STATE_VARS processing_time1;
         STATE_VARS processing_time2;
         STATE_VARS processing_time3;
-        
+        STATE_VARS id_inport;  // -    << 공중에 띄워진 대시 쓰면 안된다;;
 
     public:
         PORT* in1;
         PORT* in2;
         PORT* out1;
         PORT* out2;
-        string id_inport;  // -    << 공중에 띄워진 대시 쓰면 안된다;;
+        
 
         TWIOP(string name);
         ~TWIOP();

@@ -13,10 +13,12 @@ PS::PS( string name )
 
     job_id("job_id");
     processing_time("processing_time");
+	//stack("stack");
+	
 
     sigma = INFINITY;
     phase = "passive";
-
+	stack_ = "-";
     job_id = "-";
     processing_time = 10.0;
 

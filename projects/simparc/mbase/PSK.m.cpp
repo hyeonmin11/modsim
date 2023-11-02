@@ -12,11 +12,12 @@ PSK::PSK( string name )
 
 	job_id( "job_id" );
 	processing_time( "processing_time" );
-	
+	queue("queue");
 	sigma = INFINITY;
 	phase = "passive";
 
 	job_id = "-";
+	queue = "-";
 	processing_time = 10.0;
 }
 
@@ -43,6 +44,9 @@ void PSK::externalTransitionFunc( timetype e, CONTENT x )
                 queue.addq( x.getValue() );
                 Continue( e );
             }
+			else{
+				Continue(e);
+			}
 
 		}
 	}

@@ -11,6 +11,11 @@ class SCH: public ATOMIC_MODELS
 protected:
 	STATE_VARS job_id; // this is for 'in' port
 	STATE_VARS temp;
+	STATE_VARS date_id;
+	STATE_VARS feeling_id;
+
+	//string date_id;
+	//string feeling_id;
 
 	STATE_VARS processing_time_sleep;
 	STATE_VARS processing_time_study;
@@ -38,7 +43,7 @@ public:
 	void internalTransitionFunc();
 	CONTENT outputFunc();
 	string id_inport;
-	string feeling_id;
-	string date_id;
+	
+	
 };
 #endif

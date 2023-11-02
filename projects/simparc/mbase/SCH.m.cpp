@@ -23,6 +23,19 @@ SCH::SCH( string name )
 	addOutport( *out );
 	addOutport( *message );
 
+	sigma = INFINITY;
+	phase = "sleep";
+	id_inport = "-";
+
+
+	job_id("job_id");
+	feeling_id("feeling_id");
+	date_id("date_id");
+	job_id = "-";
+	//temp = "-";
+	feeling_id = "-";
+	date_id = "-";
+
 	processing_time_sleep("processing_time_sleep");
 	processing_time_study("processing_time_study");
 	processing_time_gohome("processing_time_gohome");
@@ -40,15 +53,6 @@ SCH::SCH( string name )
 	processing_time_lecture = 2.0;
 	processing_time_nap = 1.0;
 	processing_time_workout = 2.0;
-
-	sigma = INFINITY;
-	phase = "sleep";
-	id_inport = "-";
-
-	job_id = "-";
-	temp = "-";
-	feeling_id = "-";
-	date_id = "-";
 }
 
 SCH::~SCH()
@@ -67,7 +71,7 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 {
     PORT* tempP = x.getPort();
     id_inport = (*tempP).getName();
-
+	printf("%s", job_id);
 	if(id_inport == "in" ){
 		if(job_id == "alarm"){
 			//Continue(e);
@@ -84,7 +88,7 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 		if( job_id == "weekday" ){
 			date_id = "weekday";
 		}
-		else{
+		else if( job_id == "weekend") {
 			date_id = "weekend";
 		}
 	}
@@ -136,15 +140,14 @@ void SCH::internalTransitionFunc()
 			holdIn( "study", STR_TO_DBL( processing_time_study.getV()));
 		}
 	}
-
-
-
-
-	if( date_id == "weekend"){
+	else if( date_id == "weekend"){
 		if( phase == "mealtime"){
 			holdIn( "sleep", STR_TO_DBL( processing_time_sleep.getV()));
 		}
-		else if ( phase == "sleep" || phase == "wakeup"){
+		else if ( phase == "sleep"){
+			holdIn( "wakeup", STR_TO_DBL( processing_time_wakeup.getV()));
+		}
+		else if ( phase == "wakeup" ){
 			holdIn( "mealtime", STR_TO_DBL( processing_time_mealtime.getV()));
 		}
 	}
