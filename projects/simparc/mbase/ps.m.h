@@ -5,14 +5,14 @@
 #include "ATOMIC_MODELS.h"
 #include "MACROS.h"
 #define PS_NAME "PS"
-#include <stack>
+#include <queue>
 
 class PS: public ATOMIC_MODELS
 {
     protected:
         STATE_VARS job_id;
-        stack<string> _stack;
-        STATE_VARS stack_;
+        queue<string> _stack;
+        STATE_VARS stack;
         STATE_VARS processing_time;
     
     public:

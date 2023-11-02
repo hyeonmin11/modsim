@@ -71,13 +71,13 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 {
     PORT* tempP = x.getPort();
     id_inport = (*tempP).getName();
-	printf("%s", job_id);
+	
 	if(id_inport == "in" ){
-		if(job_id == "alarm"){
+		if(x.getValue() == "alarm"){
 			//Continue(e);
 			holdIn("wakeup", STR_TO_DBL(processing_time_wakeup.getV()));
 		}
-		else if(job_id == "mealtime2"){
+		else if(x.getValue() == "mealtime2"){
 			//Continue(e);
 			// this is only for weekday and for lunch, dinner and snack. not for breakfast
 			holdIn( "mealtime2", STR_TO_DBL( processing_time_mealtime.getV()));
@@ -85,19 +85,21 @@ void SCH::externalTransitionFunc( timetype e, CONTENT x )
 	}
 	else if(id_inport == "date"){
 		//Continue(e);
-		if( job_id == "weekday" ){
+		if( x.getValue() == "weekday" ){
 			date_id = "weekday";
 		}
-		else if( job_id == "weekend") {
+		else if( x.getValue() == "weekend") {
 			date_id = "weekend";
 		}
 	}
 	else if(id_inport == "breaktime"){
 		//Continue(e);
-		if( job_id == "tired" ){
+		if( x.getValue() == "tired" ){
+			feeling_id = "tired";
 			holdIn("nap", STR_TO_DBL(processing_time_nap.getV()));
 		}
-		else if( job_id == "active" ){
+		else if( x.getValue() == "active" ){
+			feeling_id = "active";
 			holdIn("workout", STR_TO_DBL(processing_time_workout.getV()));
 		}
 	}
@@ -162,7 +164,7 @@ CONTENT SCH::outputFunc()
 
 
 	if(id_inport == "breaktime"){
-		y.setContent(message, id_inport);
+		y.setContent(message, " " + id_inport);
 	}
 	if(phase == "gohome"){
 		y.setContent(out, " Gohome, shower and go to bed. Good night");

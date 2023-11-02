@@ -13,13 +13,15 @@ PS::PS( string name )
 
     job_id("job_id");
     processing_time("processing_time");
-	//stack("stack");
+	stack("stack");
 	
 
     sigma = INFINITY;
     phase = "passive";
-	stack_ = "-";
-    job_id = "-";
+
+	job_id = "-";
+	stack = "-";
+    
     processing_time = 10.0;
 
 }
@@ -32,31 +34,43 @@ PS::~PS()
 
 void PS::externalTransitionFunc(timetype e, CONTENT x)
 {
-	if ( *in == x.getPort() )
+	if ( phase == "passive" )
 	{
-		if ( phase == "passive" )
-		{
-			job_id = x.getValue();
-			holdIn( "busy", STR_TO_DBL( processing_time.getV() ) );
-		}
-		else if ( phase == "busy" )
-		{
-			_stack.push( x.getValue() );
-			Continue( e );
-		}
+		job_id = x.getValue();
+		holdIn( "busy", STR_TO_DBL( processing_time.getV() ) );
 	}
+	else if ( phase == "busy" )
+	{
+		stack.addq( x.getValue() );
+		//_stack.push( x.getValue());
+		Continue( e );
+	}
+	
 }
 
 void PS::internalTransitionFunc()
 {
 	if ( phase == "busy" )
 	{
-		if ( 1 ) //_stack.empty()
+		if ( stack.checkEmptyQueue() ) //_stack.empty()
 			passivate();
 		else
-		{
-			job_id = _stack.top();
-            _stack.pop();
+		{ //pop pop pop push push
+			while(1){ // 1 2 3
+				string job = stack.deleteq();
+				if(stack.checkEmptyQueue()){
+					job_id = job; // 3
+					break;
+				}
+				else{
+					_stack.push(job); // 1 2
+				}
+			}
+			while(!_stack.empty()){
+				stack.addq(_stack.front());
+				_stack.pop();
+			}
+
 			holdIn( "busy", STR_TO_DBL( processing_time.getV() ) );
 		}
 	}
