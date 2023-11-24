@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<SES>
+  <item type="entity" model="CM" parent="root" name="EF_P" depth="1" />
+  <item type="aspect" parent="EF_P" name="EF_P_dec" />
+  <coupling type="line" parent="EF_P_dec" index="1" source="EF" outport="result" destin="EF_P" inport="out" selected="0" />
+  <coupling type="line" parent="EF_P_dec" index="2" source="EF" outport="out" destin="P" inport="in" selected="0" />
+  <coupling type="line" parent="EF_P_dec" index="3" source="P" outport="out" destin="EF" inport="in" selected="0" />
+  <item type="entity" model="AM" parent="EF_P" name="P" depth="2" />
+  <item type="entity" model="CM" parent="EF_P" name="EF" depth="2" />
+  <item type="aspect" parent="EF" name="EF_dec" />
+  <coupling type="line" parent="EF_dec" index="1" source="EF" outport="in" destin="TRANSD" inport="solved" selected="0" />
+  <coupling type="line" parent="EF_dec" index="2" source="GENR" outport="out" destin="EF" inport="out" selected="0" />
+  <coupling type="line" parent="EF_dec" index="3" source="TRANSD" outport="out" destin="EF" inport="result" selected="0" />
+  <coupling type="line" parent="EF_dec" index="4" source="TRANSD" outport="out" destin="GENR" inport="stop" selected="0" />
+  <coupling type="line" parent="EF_dec" index="5" source="GENR" outport="out" destin="TRANSD" inport="arrived" selected="0" />
+  <item type="entity" model="AM" parent="EF" name="GENR" depth="3" />
+  <item type="entity" model="AM" parent="EF" name="TRANSD" depth="3" />
+</SES>
