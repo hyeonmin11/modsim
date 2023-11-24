@@ -26,6 +26,8 @@ TRANSD::TRANSD( string name )
 	solved_list = "-";
 	clock = 0.0;
 	total_ta = 0.0;
+
+	srand(1);
 }
 
 

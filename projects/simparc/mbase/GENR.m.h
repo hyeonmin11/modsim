@@ -10,7 +10,8 @@ class GENR: public ATOMIC_MODELS
 {
 protected:
 	STATE_VARS inter_arrival_time;
-
+	int inputarr[15];
+	int count;
 
 public:
 	PORT* stop;
@@ -22,6 +23,7 @@ public:
 	void externalTransitionFunc( timetype e, CONTENT x );
 	void internalTransitionFunc();
 	CONTENT outputFunc();
+	string gensym();
 
 };
 
