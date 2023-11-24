@@ -48,8 +48,7 @@ string GENR::gensym()
 {
 	stringstream st;
 
-	st << "g" << count << " ";
-	count += 1;
+	st << "g1 ";
 
 	for(int i=0; i < 15; i++){
 		inputarr[i] = rand() % 100;
