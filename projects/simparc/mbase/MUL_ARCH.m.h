@@ -2,7 +2,7 @@
 #include "digraph_models.h"
 
 #include "mul_c.m.h"
-#include "p.m.h"
+#include "pl.m.h"
 
 #define MUL_ARCH_NAME "MUL_ARCH"
 
@@ -10,9 +10,9 @@ class MUL_ARCH : public DIGRAPH_MODELS
 {
 public:
 	MUL_C	*mul_c;
-	P		*p1;
-	P		*p2;
-	P		*p3;
+	PL		*pl1;
+	PL		*pl2;
+	PL		*pl3;
 
 	PORT	*in;
 	PORT	*out;

@@ -13,7 +13,7 @@ TRANSD::TRANSD( string name )
 	addInport( *arrived );
 	addOutport( *out );
 
-	observation_interval = 60;
+	observation_interval = 100;
 
 	arrived_list( "arrived_list" );
 	solved_list( "solved_list" );

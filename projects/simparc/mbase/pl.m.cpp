@@ -51,7 +51,7 @@ void PL::internalTransitionFunc()
 
 CONTENT PL::outputFunc()
 {
-    job_id = "g1 ( 90 8 7 32 18 21 56 87 4 7 2 7 4 1 66 )";
+    //job_id = "g1 ( 90 8 7 32 18 21 56 87 4 7 2 7 4 1 66 )";
 	CONTENT y;
 	string id = job_id.getV();
     int numbers[15] = {}, encryptions[15] = {};   

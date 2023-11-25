@@ -14,7 +14,7 @@ GENR::GENR( string name )
 
 	sigma = 0;
 	phase = "active";
-	inter_arrival_time = 10;
+	inter_arrival_time = 3;
 
 	inputarr[15] = {};
 	count = 1;
